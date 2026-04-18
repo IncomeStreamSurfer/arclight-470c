@@ -1,0 +1,21 @@
+{
+  "name": "arclight",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/vercel": "^9.0.5",
+    "@supabase/supabase-js": "^2.74.0",
+    "@tailwindcss/vite": "^4.1.17",
+    "astro": "^6.1.8",
+    "tailwindcss": "^4.1.17"
+  }
+}
