@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { supabase, type Service } from '../lib/supabase.ts';
+
+const { data } = await supabase
+  .from('arc_services')
+  .select('*')
+  .order('sort_order', { ascending: true });
+
+const services = (data ?? []) as Service[];
+
+const servicesLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  itemListElement: services.map((s, i) => ({
+    '@type': 'Service',
+    position: i + 1,
+    name: s.title,
+    description: s.summary,
+    provider: { '@type': 'Organization', name: 'Arclight Advisory' },
+  })),
+};
+---
+<BaseLayout
+  title="Services | Arclight Advisory"
+  description="Corporate strategy, growth & transformation, and M&A advisory services from Arclight Advisory."
+  jsonLd={servicesLd}
+>
+  <section class="bg-navy-900 text-white">
+    <div class="container-prose py-24">
+      <p class="eyebrow mb-4">Services</p>
+      <h1 class="font-serif text-5xl md:text-6xl max-w-3xl">Three practices. One standard of rigour.</h1>
+      <p class="mt-6 max-w-2xl text-navy-200 leading-relaxed text-lg">
+        Senior-led teams, no leverage, no slide factories. Every engagement is staffed by partners who have lived the decision you're making.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-24">
+    <div class="container-prose space-y-20">
+      {services.map((s, i) => (
+        <article id={s.slug} class="grid md:grid-cols-12 gap-8 scroll-mt-24">
+          <div class="md:col-span-4">
+            <p class="text-gold-600 text-xs tracking-widest uppercase mb-3">Practice 0{i + 1}</p>
+            <h2 class="font-serif text-3xl md:text-4xl text-navy-900">{s.title}</h2>
+            <div class="mt-6 h-px w-16 bg-gold-500"></div>
+          </div>
+          <div class="md:col-span-8">
+            <p class="text-xl text-navy-800 leading-relaxed mb-6">{s.summary}</p>
+            {s.body && <p class="text-navy-700 leading-relaxed">{s.body}</p>}
+            <div class="mt-8">
+              <a href="/contact" class="btn-ghost">Discuss {s.title.toLowerCase()} →</a>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="bg-navy-950 text-white py-20">
+    <div class="container-prose text-center">
+      <h2 class="font-serif text-3xl md:text-4xl max-w-2xl mx-auto">Every engagement starts with a 30-minute conversation.</h2>
+      <a href="/contact" class="btn-gold mt-8">Book a call</a>
+    </div>
+  </section>
+</BaseLayout>

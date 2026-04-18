@@ -1,0 +1,97 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { supabase, type Service, type CaseStudy } from '../lib/supabase.ts';
+
+const { data: servicesRaw } = await supabase
+  .from('arc_services')
+  .select('*')
+  .order('sort_order', { ascending: true });
+
+const { data: caseStudiesRaw } = await supabase
+  .from('arc_case_studies')
+  .select('*')
+  .order('sort_order', { ascending: true });
+
+const services = (servicesRaw ?? []) as Service[];
+const caseStudies = (caseStudiesRaw ?? []) as CaseStudy[];
+---
+<BaseLayout
+  title="Arclight Advisory | Boutique Strategy Consultancy"
+  description="Arclight Advisory is a boutique strategy firm advising boards, CEOs, and investors on corporate strategy, growth, and M&A across Europe and the US."
+>
+  <!-- Hero -->
+  <section class="bg-navy-900 text-white relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(circle at 20% 20%, #c9a961 0, transparent 50%), radial-gradient(circle at 80% 80%, #c9a961 0, transparent 40%);"></div>
+    <div class="container-prose py-28 md:py-36 relative">
+      <p class="eyebrow mb-6">Boutique Strategy · Est. 2014</p>
+      <h1 class="font-serif text-5xl md:text-7xl leading-[1.05] max-w-4xl">
+        Clarity for the <span class="text-gold-500">decisions that define</span> the decade.
+      </h1>
+      <p class="mt-8 max-w-2xl text-lg text-navy-200 leading-relaxed">
+        Arclight Advisory partners with boards, CEOs, and investors on the choices that matter most — portfolio, growth, and capital. Rigorous, independent, quietly effective.
+      </p>
+      <div class="mt-10 flex flex-wrap gap-4">
+        <a href="/contact" class="btn-gold">Start a conversation</a>
+        <a href="/case-studies" class="btn-ghost">See our work</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="py-24">
+    <div class="container-prose">
+      <div class="flex items-end justify-between mb-14 flex-wrap gap-4">
+        <div>
+          <p class="eyebrow mb-3">What we do</p>
+          <h2 class="font-serif text-4xl md:text-5xl text-navy-900">Three practices, one mandate.</h2>
+        </div>
+        <a href="/services" class="text-navy-700 hover:text-gold-600 underline underline-offset-4 decoration-gold-500">All services →</a>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8">
+        {services.map((s) => (
+          <article class="border hairline p-8 bg-white hover:shadow-xl transition-shadow">
+            <p class="text-gold-600 text-xs tracking-widest uppercase mb-4">0{s.sort_order}</p>
+            <h3 class="font-serif text-2xl text-navy-900 mb-3">{s.title}</h3>
+            <p class="text-navy-700 leading-relaxed mb-6">{s.summary}</p>
+            <a href={`/services#${s.slug}`} class="text-gold-600 hover:text-gold-700 text-sm font-semibold">Learn more →</a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Case studies strip -->
+  <section class="bg-navy-900 text-white py-24">
+    <div class="container-prose">
+      <div class="flex items-end justify-between mb-14 flex-wrap gap-4">
+        <div>
+          <p class="eyebrow mb-3">Selected engagements</p>
+          <h2 class="font-serif text-4xl md:text-5xl">Work, not slides.</h2>
+        </div>
+        <a href="/case-studies" class="text-navy-100 hover:text-gold-500 underline underline-offset-4 decoration-gold-500">All case studies →</a>
+      </div>
+      <div class="grid md:grid-cols-2 gap-8">
+        {caseStudies.slice(0, 4).map((c) => (
+          <article class="border border-navy-700 hover:border-gold-500 transition-colors p-8">
+            <p class="text-gold-500 text-xs tracking-widest uppercase mb-3">{c.industry}</p>
+            <h3 class="font-serif text-2xl text-white mb-3">{c.title}</h3>
+            <p class="text-navy-200 text-sm mb-4 leading-relaxed">{c.summary}</p>
+            {c.outcome && (
+              <p class="text-gold-400 text-sm border-t border-navy-700 pt-4 mt-4"><span class="uppercase tracking-widest text-xs text-gold-600">Outcome —</span> {c.outcome}</p>
+            )}
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-24">
+    <div class="container-prose text-center">
+      <p class="eyebrow mb-4">Considering a move?</p>
+      <h2 class="font-serif text-4xl md:text-5xl text-navy-900 max-w-3xl mx-auto">The first conversation is always the most valuable.</h2>
+      <p class="mt-6 text-navy-700 max-w-xl mx-auto">No pitch deck, no fee. Tell us what you're wrestling with and we'll tell you honestly whether — and how — we can help.</p>
+      <a href="/contact" class="btn-gold mt-10">Get in touch</a>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,25 @@
+---
+const { pathname } = Astro.url;
+const link = (href: string) =>
+  pathname === href || (href !== '/' && pathname.startsWith(href))
+    ? 'text-gold-500'
+    : 'text-navy-100 hover:text-gold-500';
+---
+<header class="bg-navy-900 text-navy-100">
+  <div class="container-prose flex items-center justify-between py-5">
+    <a href="/" class="flex items-center gap-3">
+      <span class="inline-block h-8 w-8 rounded-full border border-gold-500 flex items-center justify-center">
+        <span class="text-gold-500 font-serif text-lg leading-none">A</span>
+      </span>
+      <span class="font-serif text-xl tracking-wide text-white">Arclight Advisory</span>
+    </a>
+    <nav class="hidden md:flex items-center gap-8 text-sm tracking-wide uppercase">
+      <a href="/" class={`transition-colors ${link('/')}`}>Home</a>
+      <a href="/services" class={`transition-colors ${link('/services')}`}>Services</a>
+      <a href="/case-studies" class={`transition-colors ${link('/case-studies')}`}>Case Studies</a>
+      <a href="/about" class={`transition-colors ${link('/about')}`}>About</a>
+      <a href="/contact" class="btn-gold !py-2 !px-4 text-xs">Contact</a>
+    </nav>
+    <a href="/contact" class="md:hidden btn-gold !py-2 !px-3 text-xs">Contact</a>
+  </div>
+</header>

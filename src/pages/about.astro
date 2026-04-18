@@ -1,0 +1,85 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="About | Arclight Advisory"
+  description="Arclight Advisory is a boutique strategy firm founded in 2014, serving boards, CEOs, and investors across the UK, Europe, and the US."
+>
+  <section class="bg-navy-900 text-white">
+    <div class="container-prose py-24">
+      <p class="eyebrow mb-4">About</p>
+      <h1 class="font-serif text-5xl md:text-6xl max-w-4xl">A firm built on the conversations we'd want, at the tables we've sat at.</h1>
+    </div>
+  </section>
+
+  <section class="py-24">
+    <div class="container-prose grid md:grid-cols-12 gap-12">
+      <div class="md:col-span-5">
+        <p class="eyebrow mb-3">Our story</p>
+        <h2 class="font-serif text-3xl text-navy-900">Founded in 2014, deliberately small.</h2>
+      </div>
+      <div class="md:col-span-7 space-y-5 text-navy-700 leading-relaxed text-lg">
+        <p>
+          Arclight was founded by a small group of ex-McKinsey, ex-Bain, and ex-industry operators who were tired of pitch-deck consulting. We believed — and still believe — that the right team of five senior partners will out-deliver a pyramid of thirty, every time.
+        </p>
+        <p>
+          Today we serve roughly a dozen clients a year across strategy, transformation, and M&amp;A, operating from London and New York with a network of specialist partners across Europe.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-navy-50 py-24">
+    <div class="container-prose">
+      <p class="eyebrow mb-3 text-center">Principles</p>
+      <h2 class="font-serif text-3xl md:text-4xl text-navy-900 text-center max-w-2xl mx-auto">How we work.</h2>
+      <div class="grid md:grid-cols-3 gap-8 mt-14">
+        <div class="bg-white border hairline p-8">
+          <p class="font-serif text-4xl text-gold-500 mb-4">01</p>
+          <h3 class="font-serif text-xl text-navy-900 mb-3">Senior-led, always.</h3>
+          <p class="text-navy-700 leading-relaxed">The partner who sold the work does the work. No leverage, no handoffs to juniors, no ghost writers.</p>
+        </div>
+        <div class="bg-white border hairline p-8">
+          <p class="font-serif text-4xl text-gold-500 mb-4">02</p>
+          <h3 class="font-serif text-xl text-navy-900 mb-3">Independent by design.</h3>
+          <p class="text-navy-700 leading-relaxed">No transaction fees, no kickbacks, no tied products. Our only incentive is the quality of your next decision.</p>
+        </div>
+        <div class="bg-white border hairline p-8">
+          <p class="font-serif text-4xl text-gold-500 mb-4">03</p>
+          <h3 class="font-serif text-xl text-navy-900 mb-3">Decisions, not decks.</h3>
+          <p class="text-navy-700 leading-relaxed">We write memos, not PowerPoint. Every engagement ends with a decision taken and a plan that owns itself.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-24">
+    <div class="container-prose">
+      <p class="eyebrow mb-3">People</p>
+      <h2 class="font-serif text-3xl md:text-4xl text-navy-900">Principals.</h2>
+      <div class="grid md:grid-cols-3 gap-10 mt-12">
+        {[
+          { name: 'Eleanor Whitcombe', role: 'Founding Partner — Corporate Strategy', bg: 'Ex-McKinsey · 18 yrs · London' },
+          { name: 'Marcus Aldridge', role: 'Partner — Growth & Transformation', bg: 'Ex-Bain & CRO (SaaS) · 15 yrs · London / NYC' },
+          { name: 'Priya Raghavan', role: 'Partner — M&A and Due Diligence', bg: 'Ex-Parthenon & PE Operator · 14 yrs · NYC' },
+        ].map((p) => (
+          <article class="border hairline p-8 bg-white">
+            <div class="h-16 w-16 rounded-full bg-navy-900 text-gold-500 flex items-center justify-center font-serif text-2xl mb-5">
+              {p.name.split(' ').map((n) => n[0]).join('')}
+            </div>
+            <h3 class="font-serif text-xl text-navy-900">{p.name}</h3>
+            <p class="text-gold-600 text-sm mt-1">{p.role}</p>
+            <p class="text-navy-600 text-sm mt-3">{p.bg}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-navy-950 text-white py-20">
+    <div class="container-prose text-center">
+      <h2 class="font-serif text-3xl md:text-4xl max-w-2xl mx-auto">Let's find out if we're a fit.</h2>
+      <a href="/contact" class="btn-gold mt-8">Book a call</a>
+    </div>
+  </section>
+</BaseLayout>

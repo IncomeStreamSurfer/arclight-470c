@@ -1,0 +1,40 @@
+---
+const year = new Date().getFullYear();
+---
+<footer class="bg-navy-950 text-navy-200 mt-24">
+  <div class="container-prose py-16 grid md:grid-cols-4 gap-10">
+    <div class="md:col-span-2">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="inline-block h-8 w-8 rounded-full border border-gold-500 flex items-center justify-center">
+          <span class="text-gold-500 font-serif text-lg leading-none">A</span>
+        </span>
+        <span class="font-serif text-xl tracking-wide text-white">Arclight Advisory</span>
+      </div>
+      <p class="max-w-md text-sm text-navy-300 leading-relaxed">
+        A boutique strategy firm advising boards, CEOs, and investors on the decisions that define the next decade.
+      </p>
+    </div>
+    <div>
+      <h4 class="font-serif text-white text-base mb-4">Explore</h4>
+      <ul class="space-y-2 text-sm">
+        <li><a href="/services" class="hover:text-gold-500">Services</a></li>
+        <li><a href="/case-studies" class="hover:text-gold-500">Case Studies</a></li>
+        <li><a href="/about" class="hover:text-gold-500">About</a></li>
+        <li><a href="/contact" class="hover:text-gold-500">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="font-serif text-white text-base mb-4">Contact</h4>
+      <ul class="space-y-2 text-sm text-navy-300">
+        <li><a href="mailto:hello@arclight.example" class="hover:text-gold-500">hello@arclight.example</a></li>
+        <li>London · New York</li>
+      </ul>
+    </div>
+  </div>
+  <div class="border-t border-navy-800">
+    <div class="container-prose py-6 text-xs text-navy-400 flex flex-col md:flex-row items-center justify-between gap-2">
+      <p>© {year} Arclight Advisory. All rights reserved.</p>
+      <p class="tracking-widest uppercase">Strategy · Transformation · M&amp;A</p>
+    </div>
+  </div>
+</footer>

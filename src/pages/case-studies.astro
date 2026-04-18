@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { supabase, type CaseStudy } from '../lib/supabase.ts';
+
+const { data } = await supabase
+  .from('arc_case_studies')
+  .select('*')
+  .order('sort_order', { ascending: true });
+
+const caseStudies = (data ?? []) as CaseStudy[];
+---
+<BaseLayout
+  title="Case Studies | Arclight Advisory"
+  description="Selected Arclight Advisory engagements across FinTech, Industrial, Healthcare, and Consumer & Retail."
+>
+  <section class="bg-navy-900 text-white">
+    <div class="container-prose py-24">
+      <p class="eyebrow mb-4">Case studies</p>
+      <h1 class="font-serif text-5xl md:text-6xl max-w-3xl">Quiet work. Measurable outcomes.</h1>
+      <p class="mt-6 max-w-2xl text-navy-200 leading-relaxed text-lg">
+        A selection of recent engagements. Client names are withheld on request — the work and the outcomes speak for themselves.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-24">
+    <div class="container-prose grid md:grid-cols-2 gap-10">
+      {caseStudies.map((c, i) => (
+        <article class="group relative bg-white border hairline p-10 hover:shadow-2xl transition-all">
+          <span class="absolute top-6 right-6 font-serif text-6xl text-gold-100 group-hover:text-gold-200 transition-colors leading-none select-none">
+            {String(i + 1).padStart(2, '0')}
+          </span>
+          <p class="text-gold-600 text-xs tracking-widest uppercase mb-4">{c.industry}</p>
+          <p class="font-serif text-lg text-navy-500 mb-1">{c.client}</p>
+          <h2 class="font-serif text-2xl md:text-3xl text-navy-900 mb-5 leading-tight">{c.title}</h2>
+          <p class="text-navy-700 leading-relaxed mb-6">{c.summary}</p>
+          {c.outcome && (
+            <div class="border-t hairline pt-5 mt-5">
+              <p class="text-xs tracking-widest uppercase text-gold-600 mb-2">Outcome</p>
+              <p class="text-navy-800 font-medium">{c.outcome}</p>
+            </div>
+          )}
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="bg-navy-950 text-white py-20">
+    <div class="container-prose text-center">
+      <h2 class="font-serif text-3xl md:text-4xl max-w-2xl mx-auto">Could your next engagement live here?</h2>
+      <p class="mt-4 text-navy-200 max-w-xl mx-auto">We take on a limited number of mandates each year.</p>
+      <a href="/contact" class="btn-gold mt-8">Start the conversation</a>
+    </div>
+  </section>
+</BaseLayout>
